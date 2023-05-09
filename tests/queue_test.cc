@@ -23,7 +23,7 @@ TEST_CASE("Teste enfileira e desenfileira") {
 
     bool correct = true;
 
-    // Desefileira os valores
+    // Desenfileira os valores
     for (int i = 0; i < queueRandomLenght; i++) {
         if (vt[i] != queue.dequeue()) {
             correct = false;

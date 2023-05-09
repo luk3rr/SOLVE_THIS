@@ -14,7 +14,7 @@
 #define ROUNDS 5 // Número de testes com uma mesma expressão
 #define EXPRESSIONS_AMOUNT 100 // Quantidade de expressões que são analisadas
 #define TOKENS_MAX_AMOUNT 1000 // Tamanho máximo de uma expressão
-#define EXPRESSIONS_TEST_AMOUNT TOKENS_MAX_AMOUNT/EXPRESSIONS_AMOUNT // Define a quantidade de testes
+#define EXPRESSIONS_TEST_AMOUNT TOKENS_MAX_AMOUNT/EXPRESSIONS_AMOUNT // Define o quanto a quantidade de tokens em uma expressão varia em cada teste
 #define SIN_CICLES 10000000 // Quantidade de senos calculados para que o tempo das analises fique em segundos
 
 class Analyzer {
