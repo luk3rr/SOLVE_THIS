@@ -2,4 +2,5 @@ bin/*
 obj/*
 *.out*
 *.dat
-*.png
+*.png*
+*.html
