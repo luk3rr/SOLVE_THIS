@@ -15,7 +15,7 @@ class BinaryTree {
         int _nodes;
 
         /**
-        @brief Imprimi a árvore
+        @brief Imprime a árvore
         @param output Arquivo em que a impressão será feita
         @param level Nível do nó atual
         @param node Nó atual
@@ -118,7 +118,7 @@ class BinaryTree {
         void levelOrderTreeWalk(CircularQueue<typeT> &walk);
 
         /**
-        @brief Imprimi a árvore
+        @brief Imprime a árvore
         @param output Arquivo em que a impressão será feita
         */
         void dumpTree(std::ofstream &output);
