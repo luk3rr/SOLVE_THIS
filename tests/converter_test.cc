@@ -67,4 +67,18 @@ TEST_CASE("Validar conversão de infixa para posfixa") {
         std::string converted = Converter::infix2Postfix(infix);
         CHECK(postfixExpected == converted);
     }
+
+    SUBCASE("Parênteses no operador: caso 1") {
+        std::string infix = "1 ( + ) 3";
+        std::string postfixExpected = "1 3 +";
+        std::string converted = Converter::infix2Postfix(infix);
+        CHECK(postfixExpected == converted);
+    }
+
+    SUBCASE("Parênteses no operador: caso 2") {
+        std::string infix = "1 * 3 ( / ) 5 - 45";
+        std::string postfixExpected = "1 3 * 5 / 45 -";
+        std::string converted = Converter::infix2Postfix(infix);
+        CHECK(postfixExpected == converted);
+    }
 }

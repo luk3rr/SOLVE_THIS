@@ -72,6 +72,7 @@ TEST_CASE("Validar expressão infixa") {
     SUBCASE("Expressão infixa válida com parênteses") {
         CHECK(Parser::infixIsValid("( 1 ) * 3 / 5 - 45"));
         CHECK(Parser::infixIsValid("1 * 3 ( / ) 5 - 45"));
+        CHECK(Parser::infixIsValid("1 ( * ) 3"));
         CHECK(Parser::infixIsValid("1 * 3 / ( 5.3 - 45 )"));
     }
 
