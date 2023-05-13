@@ -44,22 +44,21 @@ int Converter::precedence(const std::string &str) {
 std::string Converter::infix2Postfix(std::string str) {
     // Essa função foi implementada a partir da ideia do algoritmo "Shunting Yard", proposto por Edsgar Dijkstra
 
-    CircularQueue<std::string> output;
     Stack<std::string> simbols;
-    std::string token, aux;
+    std::string token, output;
     std::istringstream iss(str);
 
     while (iss >> token) {
         if (Parser::isNumber(token)) {
             Converter::comma2DotDecimalConverter(token);
-            output.enqueue(token);
+            output += token + " ";
         }
         else if (Parser::isValidOperator(token)) {
             try {
                 // Enquanto a precedência do último operador lido na string for menor ou igual a precedência do operador
                 // no topo da pilha, mova este operador no topo para a fila output
                 while (Converter::precedence(token) <= Converter::precedence(simbols.peek()))
-                    output.enqueue(simbols.pop());
+                    output += simbols.pop() + " ";
 
                 simbols.push(token);
 
@@ -80,7 +79,7 @@ std::string Converter::infix2Postfix(std::string str) {
             // desempilhados e enviados à fila
             try {
                 while (simbols.peek() != "(")
-                    output.enqueue(simbols.pop());
+                    output += simbols.pop() + " ";
 
                 simbols.pop();
             } catch (stkexcpt::StackIsEmpty &e) {
@@ -92,9 +91,13 @@ std::string Converter::infix2Postfix(std::string str) {
     while (!simbols.isEmpty()) {
         // Em certos casos pode haver operadores na pilha de simbolos após a leitura da string terminar nesse caso esses
         // operadores podem ser desempilhados e enviados ao fim da expressão posfixa
-        output.enqueue(simbols.pop());
+        output += simbols.pop() + " ";
     }
-    return Converter::queue2String(output);
+
+    // Remove o espaço em branco no fim da string
+    if (!output.empty() and output.back() == ' ')
+        output.erase(output.size() - 1);
+    return output;
 }
 
 std::string Converter::postfix2Infix(CircularQueue<std::string> postfix) {
