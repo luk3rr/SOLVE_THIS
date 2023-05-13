@@ -67,7 +67,7 @@ $(OBJ_DIR)/%.o: $(TST_DIR)/%.cc
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cc
 	$(CC) -c $(CFLAGS) $< -I $(INC_DIR) -o $@
 
-valgrind: build test
+valgrind: build tests
 	valgrind --leak-check=full $(BIN_DIR)/$(TEST_NAME) > /dev/null
 	valgrind --leak-check=full $(BIN_DIR)/$(PROGRAM_NAME) --file
 
