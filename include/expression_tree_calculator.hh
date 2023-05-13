@@ -7,7 +7,7 @@
 
 #include "binary_tree.hh"
 #include "stack.hh"
-#include "queue.hh"
+#include "queue_singly_linked.hh"
 #include "parser.hh"
 #include "converter.hh"
 #include "expression_tree_calculator_excpt.hh"

@@ -100,7 +100,7 @@ std::string Converter::infix2Postfix(std::string str) {
     return output;
 }
 
-std::string Converter::postfix2Infix(CircularQueue<std::string> postfix) {
+std::string Converter::postfix2Infix(slkd::Queue<std::string> &postfix) {
     Stack<std::string> aux;
     std::string token, leftOperand, rightOperand;
 
@@ -137,11 +137,11 @@ std::string Converter::postfix2Infix(std::string postfix) {
     return aux.pop();
 }
 
-std::string Converter::queue2String(CircularQueue<std::string> queue) {
+std::string Converter::queue2String(slkd::Queue<std::string> &queue) {
     std::string aux;
-    while (!queue.isEmpty()) {
+    while (!queue.isEmpty())
         aux += queue.dequeue() + " ";
-    }
+
     if (!aux.empty() and aux.back() == ' ')
         aux.erase(aux.size() - 1);
     return aux;

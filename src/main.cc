@@ -9,6 +9,7 @@
 #include "parser.hh"
 #include "expression_tree_calculator.hh"
 #include "parser_excpt.hh"
+#include "queue_singly_linked.hh"
 #include "utils.hh"
 
 void mainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTreeCalculator &calculator) {

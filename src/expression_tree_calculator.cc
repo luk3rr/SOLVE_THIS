@@ -1,5 +1,4 @@
 #include "expression_tree_calculator.hh"
-#include "expression_tree_calculator_excpt.hh"
 
 ExpressionTreeCalculator::~ExpressionTreeCalculator() {
     this->_expression.deleteTree();
@@ -64,13 +63,13 @@ void ExpressionTreeCalculator::storeExpression(std::string expression, std::stri
 }
 
 std::string ExpressionTreeCalculator::postfix() {
-    CircularQueue<std::string> walk;
+    slkd::Queue<std::string> walk;
     this->_expression.postorderTreeWalk(walk);
     return Converter::queue2String(walk);
 }
 
 std::string ExpressionTreeCalculator::infix() {
-    CircularQueue<std::string> walk;
+    slkd::Queue<std::string> walk;
     this->_expression.postorderTreeWalk(walk);
     return Converter::postfix2Infix(walk);
 }
@@ -90,7 +89,7 @@ void ExpressionTreeCalculator::showTree() {
 long double ExpressionTreeCalculator::evaluation() {
     Stack<long double> evaluationStack;
     std::string token;
-    CircularQueue<std::string> postfix;
+    slkd::Queue<std::string> postfix;
     this->_expression.postorderTreeWalk(postfix);
 
     // A ordem das operacoes e o operando que estiver mais embaixo na pilha com o operando acima

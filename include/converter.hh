@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <sstream>
 
-#include "queue.hh"
+#include "queue_singly_linked.hh"
 #include "stack.hh"
 
 class Converter {
@@ -27,7 +27,7 @@ class Converter {
         @param postfix Fila com a expressão que será convertida
         @return String com a expressão infixa
         */
-        static std::string postfix2Infix(CircularQueue<std::string> postfix);
+        static std::string postfix2Infix(slkd::Queue<std::string> &postfix);
 
         /**
         @brief Converte uma expressão matemática em notação posfixa para notação infixa
@@ -41,7 +41,7 @@ class Converter {
         @param queue Fila com a representação que será convertida
         @return String com a representação
         */
-        static std::string queue2String(CircularQueue<std::string> queue);
+        static std::string queue2String(slkd::Queue<std::string> &queue);
 
         /**
         @brief Converte a expressão matemática em notação infixa para notação posfixa

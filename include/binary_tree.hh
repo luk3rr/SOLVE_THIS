@@ -4,7 +4,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "queue.hh"
+#include "queue_singly_linked.hh"
 #include "binary_tree_excpt.hh"
 #include "node_doubly_linked.hh"
 
@@ -41,21 +41,21 @@ class BinaryTree {
         @param node Ponteiro para o próximo
         @param walk Fila em que serão armazenados os itens do caminhamento
         */
-        void inorderTreeWalk(CircularQueue<typeT> &walk, dlkd::Node<typeT> *node);
+        void inorderTreeWalk(slkd::Queue<typeT> &walk, dlkd::Node<typeT> *node);
 
         /**
         @brief Realiza o caminhamento pós-ordem na árvore
         @param node Ponteiro para o próximo
         @param walk Fila em que serão armazenados os itens do caminhamento
         */
-        void postorderTreeWalk(CircularQueue<typeT> &walk, dlkd::Node<typeT> *node);
+        void postorderTreeWalk(slkd::Queue<typeT> &walk, dlkd::Node<typeT> *node);
 
         /**
         @brief Realiza o caminhamento pré-ordem na árvore
         @param node Ponteiro para o próximo
         @param walk Fila em que serão armazenados os itens do caminhamento
         */
-        void preorderTreeWalk(CircularQueue<typeT> &walk, dlkd::Node<typeT> *node);
+        void preorderTreeWalk(slkd::Queue<typeT> &walk, dlkd::Node<typeT> *node);
 
     public:
         BinaryTree();
@@ -92,19 +92,19 @@ class BinaryTree {
         @brief Realiza o caminhamento in-ordem na árvore
         @param walk Fila em que serão armazenados os itens do caminhamento
         */
-        void inorderTreeWalk(CircularQueue<typeT> &walk);
+        void inorderTreeWalk(slkd::Queue<typeT> &walk);
 
         /**
         @brief Realiza o caminhamento pré-ordem na árvore
         @param walk Fila em que serão armazenados os itens do caminhamento
         */
-        void preorderTreeWalk(CircularQueue<typeT> &walk);
+        void preorderTreeWalk(slkd::Queue<typeT> &walk);
 
         /**
         @brief Realiza o caminhamento pós-ordem na árvore
         @param walk Fila em que serão armazenados os itens do caminhamento
         */
-        void postorderTreeWalk(CircularQueue<typeT> &walk);
+        void postorderTreeWalk(slkd::Queue<typeT> &walk);
 
         /**
         @brief Realiza o caminhamento por nível na árvore e vai printando os elementos
@@ -115,7 +115,7 @@ class BinaryTree {
         @brief Realiza o caminhamento por nível na árvore
         @param walk Fila em que serão armazenados os itens do caminhamento
         */
-        void levelOrderTreeWalk(CircularQueue<typeT> &walk);
+        void levelOrderTreeWalk(slkd::Queue<typeT> &walk);
 
         /**
         @brief Imprime a árvore
@@ -207,7 +207,7 @@ void BinaryTree<typeT>::deleteTree(dlkd::Node<typeT> *node) {
 }
 
 template<typename typeT>
-void BinaryTree<typeT>::inorderTreeWalk(CircularQueue<typeT> &walk) {
+void BinaryTree<typeT>::inorderTreeWalk(slkd::Queue<typeT> &walk) {
     if (this->_root != nullptr) {
         this->inorderTreeWalk(walk, this->_root->_left);
         walk.enqueue(this->_root->_key);
@@ -216,7 +216,7 @@ void BinaryTree<typeT>::inorderTreeWalk(CircularQueue<typeT> &walk) {
 }
 
 template<typename typeT>
-void BinaryTree<typeT>::inorderTreeWalk(CircularQueue<typeT> &walk, dlkd::Node<typeT> *node) {
+void BinaryTree<typeT>::inorderTreeWalk(slkd::Queue<typeT> &walk, dlkd::Node<typeT> *node) {
     if (node != nullptr) {
         this->inorderTreeWalk(walk, node->_left);
         walk.enqueue(node->_key);
@@ -225,7 +225,7 @@ void BinaryTree<typeT>::inorderTreeWalk(CircularQueue<typeT> &walk, dlkd::Node<t
 }
 
 template<typename typeT>
-void BinaryTree<typeT>::preorderTreeWalk(CircularQueue<typeT> &walk) {
+void BinaryTree<typeT>::preorderTreeWalk(slkd::Queue<typeT> &walk) {
     if (this->_root != nullptr) {
         walk.enqueue(this->_root->_key);
         this->preorderTreeWalk(walk, this->_root->_left);
@@ -234,7 +234,7 @@ void BinaryTree<typeT>::preorderTreeWalk(CircularQueue<typeT> &walk) {
 }
 
 template<typename typeT>
-void BinaryTree<typeT>::preorderTreeWalk(CircularQueue<typeT> &walk, dlkd::Node<typeT> *node) {
+void BinaryTree<typeT>::preorderTreeWalk(slkd::Queue<typeT> &walk, dlkd::Node<typeT> *node) {
     if (node != nullptr) {
         walk.enqueue(node->_key);
         this->preorderTreeWalk(walk, node->_left);
@@ -243,7 +243,7 @@ void BinaryTree<typeT>::preorderTreeWalk(CircularQueue<typeT> &walk, dlkd::Node<
 }
 
 template<typename typeT>
-void BinaryTree<typeT>::postorderTreeWalk(CircularQueue<typeT> &walk) {
+void BinaryTree<typeT>::postorderTreeWalk(slkd::Queue<typeT> &walk) {
     if (this->_root != nullptr) {
         this->postorderTreeWalk(walk, this->_root->_left);
         this->postorderTreeWalk(walk, this->_root->_right);
@@ -252,7 +252,7 @@ void BinaryTree<typeT>::postorderTreeWalk(CircularQueue<typeT> &walk) {
 }
 
 template<typename typeT>
-void BinaryTree<typeT>::postorderTreeWalk(CircularQueue<typeT> &walk, dlkd::Node<typeT> *node) {
+void BinaryTree<typeT>::postorderTreeWalk(slkd::Queue<typeT> &walk, dlkd::Node<typeT> *node) {
     if (node != nullptr) {
         this->postorderTreeWalk(walk, node->_left);
         this->postorderTreeWalk(walk, node->_right);
@@ -262,7 +262,7 @@ void BinaryTree<typeT>::postorderTreeWalk(CircularQueue<typeT> &walk, dlkd::Node
 
 template<typename typeT>
 void BinaryTree<typeT>::levelOrderTreeWalk() {
-    CircularQueue<dlkd::Node<typeT>*> queue;
+    slkd::Queue<dlkd::Node<typeT>*> queue;
     dlkd::Node<typeT> *node;
 
     queue.enqueue(this->_root);
@@ -278,8 +278,8 @@ void BinaryTree<typeT>::levelOrderTreeWalk() {
 }
 
 template<typename typeT>
-void BinaryTree<typeT>::levelOrderTreeWalk(CircularQueue<typeT> &walk) {
-    CircularQueue<dlkd::Node<typeT>*> queue;
+void BinaryTree<typeT>::levelOrderTreeWalk(slkd::Queue<typeT> &walk) {
+    slkd::Queue<dlkd::Node<typeT>*> queue;
     dlkd::Node<typeT> *node;
 
     queue.enqueue(this->_root);

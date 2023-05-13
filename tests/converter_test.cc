@@ -1,5 +1,6 @@
 #include "doctest.h"
 #include "converter.hh"
+#include "queue_singly_linked.hh"
 
 TEST_CASE("Conversor separador decimal") {
     SUBCASE("Ponto para vírgula") {
