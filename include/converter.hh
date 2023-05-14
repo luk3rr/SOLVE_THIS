@@ -6,7 +6,7 @@
 #include <sstream>
 
 #include "queue_singly_linked.hh"
-#include "stack.hh"
+#include "stack_singly_linked.hh"
 
 class Converter {
     public:

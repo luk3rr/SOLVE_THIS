@@ -44,7 +44,7 @@ int Converter::precedence(const std::string &str) {
 std::string Converter::infix2Postfix(std::string str) {
     // Essa função foi implementada a partir da ideia do algoritmo "Shunting Yard", proposto por Edsgar Dijkstra
 
-    Stack<std::string> simbols;
+    slkd::Stack<std::string> simbols;
     std::string token, output;
     std::istringstream iss(str);
 
@@ -101,7 +101,7 @@ std::string Converter::infix2Postfix(std::string str) {
 }
 
 std::string Converter::postfix2Infix(slkd::Queue<std::string> &postfix) {
-    Stack<std::string> aux;
+    slkd::Stack<std::string> aux;
     std::string token, leftOperand, rightOperand;
 
     while (!postfix.isEmpty()) {
@@ -119,7 +119,7 @@ std::string Converter::postfix2Infix(slkd::Queue<std::string> &postfix) {
 }
 
 std::string Converter::postfix2Infix(std::string postfix) {
-    Stack<std::string> aux;
+    slkd::Stack<std::string> aux;
     std::string token, leftOperand, rightOperand;
 
     std::istringstream iss(postfix);

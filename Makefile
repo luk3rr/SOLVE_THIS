@@ -20,7 +20,6 @@ MAIN = $(OBJ_DIR)/main.o
 
 PROGRAM_OBJS =  $(OBJ_DIR)/parser.o \
 				$(OBJ_DIR)/parser_excpt.o \
-				$(OBJ_DIR)/stack.o \
 				$(OBJ_DIR)/stack_excpt.o \
 				$(OBJ_DIR)/queue_excpt.o \
 				$(OBJ_DIR)/binary_tree.o \
@@ -28,6 +27,7 @@ PROGRAM_OBJS =  $(OBJ_DIR)/parser.o \
 				$(OBJ_DIR)/node_doubly_linked.o \
 				$(OBJ_DIR)/node_singly_linked.o \
 				$(OBJ_DIR)/queue_singly_linked.o \
+				$(OBJ_DIR)/stack_singly_linked.o \
 				$(OBJ_DIR)/expression_tree_calculator.o \
 				$(OBJ_DIR)/expression_tree_calculator_excpt.o \
 				$(OBJ_DIR)/utils.o \
@@ -36,8 +36,8 @@ PROGRAM_OBJS =  $(OBJ_DIR)/parser.o \
 
 TEST_OBJS =  $(OBJ_DIR)/parser_test.o \
 			 $(OBJ_DIR)/converter_test.o \
-			 $(OBJ_DIR)/stack_test.o \
 		 	 $(OBJ_DIR)/queue_singly_linked_test.o \
+		 	 $(OBJ_DIR)/stack_singly_linked_test.o \
 			 $(OBJ_DIR)/expression_tree_calculator_test.o \
 			 $(OBJ_DIR)/main_doctest.o
 

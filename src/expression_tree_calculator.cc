@@ -14,7 +14,7 @@ void ExpressionTreeCalculator::storeExpression(std::string expression) {
 
     this->_expression.deleteTree();
 
-    Stack<dlkd::Node<std::string>*> stack;
+    slkd::Stack<dlkd::Node<std::string>*> stack;
     int numNodes = expression.size();
     std::string token;
 
@@ -45,7 +45,7 @@ void ExpressionTreeCalculator::storeExpression(std::string expression, std::stri
 
     this->_expression.deleteTree();
 
-    Stack<dlkd::Node<std::string>*> stack;
+    slkd::Stack<dlkd::Node<std::string>*> stack;
     int numNodes = expression.size();
     std::string token;
 
@@ -87,7 +87,7 @@ void ExpressionTreeCalculator::showTree() {
 }
 
 long double ExpressionTreeCalculator::evaluation() {
-    Stack<long double> evaluationStack;
+    slkd::Stack<long double> evaluationStack;
     std::string token;
     slkd::Queue<std::string> postfix;
     this->_expression.postorderTreeWalk(postfix);

@@ -6,7 +6,7 @@
 #include <string>
 
 #include "binary_tree.hh"
-#include "stack.hh"
+#include "stack_singly_linked.hh"
 #include "queue_singly_linked.hh"
 #include "parser.hh"
 #include "converter.hh"
