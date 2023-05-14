@@ -9,15 +9,10 @@ double Analyzer::randomNumber(float max) {
 }
 
 char Analyzer::randomOperator() {
-    int num = randomNumber(4);
+    int num = randomNumber(2);
     if (num == 1)
         return '+';
-    else if (num == 2)
-        return '/';
-    else if (num == 3)
-        return '-';
-
-    return '*';
+    return '-';
 }
 
 std::string Analyzer::expressionGenerator(unsigned int lenght) {
@@ -37,6 +32,7 @@ void Analyzer::dummyTime() {
 }
 
 void Analyzer::expressionTreeCalculator_analysis() {
+    std::cout << "Iniciando testes da classe expressionTreeCalculator... take a coffee :)" << std::endl;
     ExpressionTreeCalculator calc;
     for (int i = 0; i <= EXPRESSIONS_AMOUNT; i++) {
         // Expressões com i * 50 tokens.
@@ -64,6 +60,7 @@ void Analyzer::expressionTreeCalculator_analysis() {
 }
 
 void Analyzer::timeAverage() {
+    std::cout << "Calculando tempos médios de execução..." << std::endl;
     for (int i = 0; i < EXPRESSIONS_AMOUNT; i++) {
         double average = 0;
         for (int j = 0; j < ROUNDS; j++) {
@@ -77,6 +74,7 @@ void Analyzer::timeAverage() {
 void Analyzer::plotAnalysis() {
     this->timeAverage();
     std::ofstream data("data.dat");
+    std::cout << "Organizando dados..." << std::endl;
     for (int i = 0; i < EXPRESSIONS_AMOUNT; i++) {
         for (int j = 0; j < 2; j++) {
             data << this->_timeAverage[i][j] << " ";
