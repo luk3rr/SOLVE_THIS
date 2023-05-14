@@ -22,6 +22,7 @@ class ExpressionTreeCalculator {
         /**
         @brief Armazena uma expressão na árvore
         @param expression Expressão que será armazenada
+        @throw psrexcpt::InvalidExpression Caso a expressão seja inválida
         */
         void storeExpression(std::string expression);
 
@@ -29,6 +30,7 @@ class ExpressionTreeCalculator {
         @brief Armazena uma expressão na árvore
         @param expression Expressão que será armazenada
         @param type Notação em que a expressão está representada
+        @throw psrexcpt::InvalidExpression Caso a expressão seja inválida
         */
         void storeExpression(std::string expression, std::string type);
 
@@ -52,7 +54,7 @@ class ExpressionTreeCalculator {
         /**
         @brief Resolve a expressão armazenada na árvore
         @return Float com o valor da expressão
-        @throw clcexcpt::DivisionByZero se ocorrer alguma tentativa de divisão por 0
+        @throw clcexcpt::DivisionByZero Caso ocorra alguma tentativa de divisão por zero
         */
         long double evaluation();
 };

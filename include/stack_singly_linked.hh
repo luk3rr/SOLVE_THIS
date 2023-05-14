@@ -33,6 +33,7 @@ namespace slkd {
             /**
             @brief Retorna o elemento no topo da pilha sem desempilha-lo
             @return Chave no topo da pilha
+            @throw queexcpt::StackIsEmpty Caso a pilha esteja vazia
             */
             typeT peek();
 

@@ -15,11 +15,12 @@ class BinaryTree {
         int _nodes;
 
         /**
-        @brief Imprime a árvore
-        @param output Arquivo em que a impressão será feita
+        @brief Função recursiva que imprime a árvore em um arquivo
+        @param node Ponteiro para o nó atual
         @param level Nível do nó atual
-        @param node Nó atual
-        @param side, deve receber True se o nó está o lado esquerdo ou False, caso o nó esteja do lado direito
+        @param vBar String com a barra vertical formada de acordo com a posição do nó atual na árvore
+        @param output Arquivo em que a impressão será feita
+        @param sideIsLeft Deve receber True se o próximo nó está do lado esquerdo do nó atual ou False caso o próximo nó esteja do lado direito
         */
         void dumpTree(dlkd::Node<typeT> *&node, int level, const std::string &vBar, std::ofstream &output, bool sideIsLeft);
 
@@ -80,6 +81,8 @@ class BinaryTree {
         @brief Insere uma nova árvore já existente
         @param root Ponteiro para a raiz da árvore que será armazenada
         @param nodes Número de nós da árvore
+        @throw bntexcpt::TreeIsNotEmpty Caso já exista uma árvore armazenada
+        @throw bntexcpt::NewTreeIsEmpty Caso a árvore que será inserida não tenha nós
         */
         void insertExistingTree(dlkd::Node<typeT> *root, int nodes);
 
