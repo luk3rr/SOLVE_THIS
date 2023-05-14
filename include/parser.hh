@@ -44,7 +44,7 @@ class Parser {
         @param infix Expressão infixa que será avalida
         @return True se a ordem dos parênteses for coerente, False caso contrário
         */
-        static bool parentesesOrderIsValid(std::string infix);
+        static bool parenthesisIsValid(std::string infix);
 };
 
 #endif // PARSER_H_

@@ -41,36 +41,56 @@ bool Parser::isValidOperator(std::string &str) {
         return false;
 }
 
-bool Parser::parentesesOrderIsValid(std::string infix) {
+bool Parser::parenthesisIsValid(std::string infix) {
+    // Premissas para a verificação da validade dos parênteses em uma expressão:
+    // 1. O quantidade de '(' deve ser igual à quantidade de ')'
+    // 2. Os parênteses devem estar ordenados, ou seja, uma expressão do tipo '1 + ) 3 - 5 (' não deve ser aceita como válida
+    // 3. Dentro dos parênteses deve haver uma subexpressão válida, ou seja, algo do tipo '1 ( + ) 3' não deve ser aceito como válido
+
     std::string token;
     std::istringstream iss(infix);
-    int valid = 0;
+
+    int pendingClosingParenthesis = 0; // Usado rificação da premissa #1
+    int orderIsValid = 0; // Usada na verificação da premissa #2
+    bool lastIsOpenParenthesis = false; // Usada na verificação da premissa #3
 
     while (iss >> token) {
-        if (token == ")")
-            valid--;
+        if (token == ")") {
+            orderIsValid--;
+            pendingClosingParenthesis--;
+            lastIsOpenParenthesis = false;
+        }
+        else if (token == "(") {
+            orderIsValid++;
+            pendingClosingParenthesis++;
+            lastIsOpenParenthesis = true;
+        }
+        else if (Parser::isValidOperator(token) and lastIsOpenParenthesis)
+            return false;
 
-        else if (token == "(")
-            valid++;
+        else if (Parser::isNumber(token) and lastIsOpenParenthesis)
+            lastIsOpenParenthesis = false;
 
-        if (valid == -1)
+        if (orderIsValid == -1)
             return false;
     }
+    if (pendingClosingParenthesis != 0)
+        return false;
+
     return true;
 }
 
-
 bool Parser::infixIsValid(std::string infix) {
-    // Premissas para a validade da expressão infixa
+    // Premissas para a verificação da validade de uma expressão infixa
     // 1. Sempre haverá um operador entre dois números
-    // 2. Sempre haverá um námero entre dois operadores
+    // 2. Sempre haverá um número entre dois operadores
     // 3. O número de abertura de parênteses deve ser igual ao número de fechamento de parênteses
     // 4. O expressão termina com um número
 
-    if (!Parser::parentesesOrderIsValid(infix))
+    // Verificação da premissa #3 e outros casos de invalidez
+    if (!Parser::parenthesisIsValid(infix))
         return false;
 
-    int pendingClosingParentheses = 0;
     std::string token;
     std::istringstream iss(infix);
 
@@ -80,8 +100,7 @@ bool Parser::infixIsValid(std::string infix) {
     while (iss >> token) {
         if (Parser::isNumber(token)) {
             Converter::comma2DotDecimalConverter(token);
-            // Verificação da premissa #1
-            if (!lastIsNumber) {
+            if (!lastIsNumber) { // Verificação da premissa #1
                 lastIsNumber = true;
                 continue;
             }
@@ -89,33 +108,28 @@ bool Parser::infixIsValid(std::string infix) {
                 return false;
         }
         else if (Parser::isValidOperator(token)) {
-            // Verificação da premissa #2
-            if (lastIsNumber) {
+            if (lastIsNumber) { // Verificação da premissa #2
                 lastIsNumber = false;
                 continue;
             }
             else
                 return false;
         }
-        else if (token == "(")
-            pendingClosingParentheses++;
-
-        else if (token == ")")
-            pendingClosingParentheses--;
+        else if (token == "(" or token == ")")
+            continue;
 
         else
             // Expressão contém um caractere que não compõem um número válido, nem é um operador válido e não é parênteses
             return false;
     }
-    // Verificação das premissas #3 e #4
-    if (pendingClosingParentheses != 0 or !lastIsNumber)
+    if (!lastIsNumber) // Verificação das premissas #4
         return false;
 
     return true;
 }
 
 bool Parser::postfixIsValid(std::string postfix) {
-    // Premissas para a validade da expressão posfixa
+    // Premissas para a verificação da validade de uma expressão posfixa
     // 1. A expressão não pode começar com um operador, além disso os dois primeiros tokens da string necessariamente são operandos
     // 2. A expressão não pode terminar com um operando
     // 3. Toda expressao posfixa tem N - 1 operandores, onde N é a quantidade de operandos.
@@ -140,12 +154,10 @@ bool Parser::postfixIsValid(std::string postfix) {
             // Expressão contém um caractere que não compõem um número válido e nem é um operador válido
             return false;
     }
-    // Verificação da premissa #2
-    if (Parser::isNumber(token))
+    if (Parser::isNumber(token)) // Verificação da premissa #2
         return false;
 
-    // Verificação da premissa #3
-    if (operands - 1 != operators)
+    if (operands - 1 != operators) // Verificação da premissa #3
         return false;
 
     return true;

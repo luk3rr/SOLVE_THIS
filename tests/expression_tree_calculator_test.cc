@@ -11,7 +11,7 @@ TEST_CASE("Resolver expressao posfixa") {
     CHECK(calculator.evaluation() - result <= 0.0001);
 }
 
-TEST_CASE("Divisão por zero") {
+TEST_CASE("Lançamento de exceção: Divisão por zero") {
     ExpressionTreeCalculator calculator;
 
     SUBCASE("Zero implícito na expressão") {

@@ -56,13 +56,16 @@ TEST_CASE("Validar expressão infixa") {
     }
 
     SUBCASE("Expressão com parênteses inválidos") {
-        CHECK(!Parser::infixIsValid("1 * ( 3 - 45"));
-        CHECK(!Parser::infixIsValid("1 * 3 - 45.5 )"));
-        CHECK(!Parser::infixIsValid("( ( 1 * 3 - 45 )"));
-        CHECK(!Parser::infixIsValid("1 * 3 ) - 45 )"));
-        CHECK(!Parser::parentesesOrderIsValid(") 1 * 3 ( / 5 - 45"));
-        CHECK(!Parser::parentesesOrderIsValid("1 * ) 3 / 5.3 ( - 45"));
-        CHECK(!Parser::parentesesOrderIsValid("( 1 * ) ) 3 / 5.3 ( - 45"));
+        CHECK(!Parser::parenthesisIsValid("1 * ( 3 - 45"));
+        CHECK(!Parser::parenthesisIsValid("1 * 3 - 45.5 )"));
+        CHECK(!Parser::parenthesisIsValid("( ( 1 * 3 - 45 )"));
+        CHECK(!Parser::parenthesisIsValid("1 * 3 ) - 45 )"));
+        CHECK(!Parser::parenthesisIsValid(") 1 * 3 ( / 5 - 45"));
+        CHECK(!Parser::parenthesisIsValid("1 * ) 3 / 5.3 ( - 45"));
+        CHECK(!Parser::parenthesisIsValid("( 1 * ) ) 3 / 5.3 ( - 45"));
+        CHECK(!Parser::parenthesisIsValid("1 ( * ) 3"));
+        CHECK(!Parser::parenthesisIsValid("1 ( + ) 3"));
+        CHECK(!Parser::parenthesisIsValid("1 * 3 ( / ) 5 - 45"));
     }
 
     SUBCASE("Expressão infixa válida sem parênteses") {
@@ -70,9 +73,6 @@ TEST_CASE("Validar expressão infixa") {
     }
 
     SUBCASE("Expressão infixa válida com parênteses") {
-        CHECK(Parser::infixIsValid("( 1 ) * 3 / 5 - 45"));
-        CHECK(Parser::infixIsValid("1 * 3 ( / ) 5 - 45"));
-        CHECK(Parser::infixIsValid("1 ( * ) 3"));
         CHECK(Parser::infixIsValid("1 * 3 / ( 5.3 - 45 )"));
     }
 
@@ -104,7 +104,7 @@ TEST_CASE("Validar expressão posfixa") {
         CHECK(!Parser::postfixIsValid("3 4 - 5 ) - +"));
     }
 
-    SUBCASE("Expressão com caracteres inválidos") {
-        CHECK(!Parser::postfixIsValid("3 4 - . - +"));
+    SUBCASE("Expressão com '.' como se fosse um número") {
+        CHECK(!Parser::postfixIsValid("3 4 . - +"));
     }
 }
