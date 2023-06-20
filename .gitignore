@@ -1,7 +1,6 @@
-bin/*
-obj/*
-*.out*
-*.dat
-*.png*
-*.html
+bin/program
+bin/test
+*.o
 arvore.txt
+*.dat
+*.png
