@@ -1,8 +1,14 @@
+/*
+* Filename: queue_singly_linked.h
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #ifndef QUEUE_SINGLY_LINKED_H_
 #define QUEUE_SINGLY_LINKED_H_
 
-#include "node_singly_linked.hh"
-#include "queue_excpt.hh"
+#include "node_singly_linked.h"
+#include "queue_excpt.h"
 
 // Singly linked namespace
 namespace slkd {

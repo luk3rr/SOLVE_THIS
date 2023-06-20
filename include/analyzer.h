@@ -1,3 +1,9 @@
+/*
+* Filename: analyzer.h
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #ifndef ANALYZER_H_
 #define ANALYZER_H_
 
@@ -9,7 +15,7 @@
 #include <string>
 #include <random>
 
-#include "expression_tree_calculator.hh"
+#include "expression_tree_calculator.h"
 
 #define ROUNDS 5 // Número de testes com uma mesma expressão
 #define EXPRESSIONS_AMOUNT 100 // Quantidade de expressões que são analisadas

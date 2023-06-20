@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+# Filename: gen_expression.py
+# Created on: May  9, 2023
+# Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+
 import random
 import argparse
 

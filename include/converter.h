@@ -1,3 +1,9 @@
+/*
+* Filename: converter.h
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #ifndef CONVERTER_H_
 #define CONVERTER_H_
 
@@ -5,8 +11,8 @@
 #include <stdexcept>
 #include <sstream>
 
-#include "queue_singly_linked.hh"
-#include "stack_singly_linked.hh"
+#include "queue_singly_linked.h"
+#include "stack_singly_linked.h"
 
 class Converter {
     public:

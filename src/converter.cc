@@ -1,5 +1,11 @@
-#include "converter.hh"
-#include "parser.hh" // incluído aqui devido ao problema de inclusão recursiva
+/*
+* Filename: converter.cc
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
+#include "converter.h"
+#include "parser.h" // incluído aqui devido ao problema de inclusão recursiva
 
 long double Converter::str2Double(std::string &str) {
     Converter::comma2DotDecimalConverter(str);

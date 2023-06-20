@@ -1,12 +1,18 @@
+/*
+* Filename: binary_tree.h
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #ifndef BINARY_TREE_H_
 #define BINARY_TREE_H_
 
 #include <fstream>
 #include <iostream>
 
-#include "queue_singly_linked.hh"
-#include "binary_tree_excpt.hh"
-#include "node_doubly_linked.hh"
+#include "queue_singly_linked.h"
+#include "binary_tree_excpt.h"
+#include "node_doubly_linked.h"
 
 template <typename typeT>
 class BinaryTree {

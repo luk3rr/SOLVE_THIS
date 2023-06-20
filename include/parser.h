@@ -1,3 +1,9 @@
+/*
+* Filename: parser.h
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #ifndef PARSER_H_
 #define PARSER_H_
 
@@ -5,8 +11,8 @@
 #include <sstream>
 #include <cctype>
 
-#include "parser_excpt.hh"
-#include "converter.hh"
+#include "parser_excpt.h"
+#include "converter.h"
 
 class Parser {
     public:

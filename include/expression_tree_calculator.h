@@ -1,3 +1,9 @@
+/*
+* Filename: expression_tree_calculator.h
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #ifndef EXPRESSION_TREE_CALCULATOR_H_
 #define EXPRESSION_TREE_CALCULATOR_H_
 
@@ -5,12 +11,12 @@
 #include <sstream>
 #include <string>
 
-#include "binary_tree.hh"
-#include "stack_singly_linked.hh"
-#include "queue_singly_linked.hh"
-#include "parser.hh"
-#include "converter.hh"
-#include "expression_tree_calculator_excpt.hh"
+#include "binary_tree.h"
+#include "stack_singly_linked.h"
+#include "queue_singly_linked.h"
+#include "parser.h"
+#include "converter.h"
+#include "expression_tree_calculator_excpt.h"
 
 class ExpressionTreeCalculator {
     private:

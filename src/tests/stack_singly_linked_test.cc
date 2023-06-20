@@ -1,10 +1,16 @@
+/*
+* Filename: stack_singly_linked_test.cc
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #include <ctime>
 #include <cstdlib>
 #include <random>
 
 #include "doctest.h"
-#include "stack_singly_linked.hh"
-#include "stack_excpt.hh"
+#include "stack_singly_linked.h"
+#include "stack_excpt.h"
 
 #define STACK_MAX_LENGTH_TEST 10000
 #define STACK_MIN_LENGTH_TEST 10

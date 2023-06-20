@@ -1,10 +1,16 @@
+/*
+* Filename: queue_singly_linked_test.cc
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #include <ctime>
 #include <cstdlib>
 #include <random>
 
 #include "doctest.h"
-#include "queue_excpt.hh"
-#include "queue_singly_linked.hh"
+#include "queue_excpt.h"
+#include "queue_singly_linked.h"
 
 #define QUEUE_MAX_LENGTH_TEST 10000
 #define QUEUE_MIN_LENGTH_TEST 10

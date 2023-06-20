@@ -1,3 +1,9 @@
+/*
+* Filename: node_doubly_linked.h
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 // Doubly linked namespace
 namespace dlkd {
     template <typename typeT>

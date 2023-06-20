@@ -1,16 +1,22 @@
+/*
+* Filename: main.cc
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #include <iostream>
 #include <iomanip>
 #include <sstream>
 #include <string>
 
-#include "analyzer.hh"
-#include "converter.hh"
-#include "expression_tree_calculator_excpt.hh"
-#include "parser.hh"
-#include "expression_tree_calculator.hh"
-#include "parser_excpt.hh"
-#include "queue_singly_linked.hh"
-#include "utils.hh"
+#include "analyzer.h"
+#include "converter.h"
+#include "expression_tree_calculator_excpt.h"
+#include "parser.h"
+#include "expression_tree_calculator.h"
+#include "parser_excpt.h"
+#include "queue_singly_linked.h"
+#include "utils.h"
 
 void mainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTreeCalculator &calculator) {
     utils::Command cmd;

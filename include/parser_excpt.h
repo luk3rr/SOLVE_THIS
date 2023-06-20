@@ -1,3 +1,9 @@
+/*
+* Filename: parser_excpt.h
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #ifndef PARSEREXCPT_H_
 #define PARSEREXCPT_H_
 

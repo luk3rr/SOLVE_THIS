@@ -1,7 +1,13 @@
+/*
+* Filename: parser_test.cc
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #include <string>
 
 #include "doctest.h"
-#include "parser.hh"
+#include "parser.h"
 
 TEST_CASE("Verificar se a string representa um número") {
     SUBCASE("Válidos") {

@@ -1,3 +1,9 @@
+/*
+* Filename: utils.h
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #ifndef UTILS_H_
 #define UTILS_H_
 

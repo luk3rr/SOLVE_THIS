@@ -1,6 +1,12 @@
+/*
+* Filename: converter_test.cc
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #include "doctest.h"
-#include "converter.hh"
-#include "queue_singly_linked.hh"
+#include "converter.h"
+#include "queue_singly_linked.h"
 
 TEST_CASE("Conversor separador decimal") {
     SUBCASE("Ponto para vírgula") {

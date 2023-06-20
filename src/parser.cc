@@ -1,4 +1,10 @@
-#include "parser.hh"
+/*
+* Filename: parser.cc
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
+#include "parser.h"
 
 bool Parser::isNumber(std::string &str) {
     bool dotInNumber = false;

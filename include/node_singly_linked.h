@@ -1,3 +1,9 @@
+/*
+* Filename: node_singly_linked.h
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
 #ifndef NODE_SINGLY_LINKED_H_
 #define NODE_SINGLY_LINKED_H_
 

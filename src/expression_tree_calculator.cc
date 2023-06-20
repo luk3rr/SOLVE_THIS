@@ -1,4 +1,10 @@
-#include "expression_tree_calculator.hh"
+/*
+* Filename: expression_tree_calculator.cc
+* Created on: May  9, 2023
+* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+*/
+
+#include "expression_tree_calculator.h"
 
 ExpressionTreeCalculator::~ExpressionTreeCalculator() {
     this->_expression.deleteTree();
