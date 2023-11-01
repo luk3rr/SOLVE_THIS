@@ -7,7 +7,7 @@
 #include "expression_tree_calculator.h"
 
 ExpressionTreeCalculator::~ExpressionTreeCalculator() {
-    this->_expression.deleteTree();
+    this->_expression.DeleteTree();
 }
 
 void ExpressionTreeCalculator::storeExpression(std::string expression) {
@@ -18,7 +18,7 @@ void ExpressionTreeCalculator::storeExpression(std::string expression) {
         throw psrexcpt::InvalidExpression(expression);
     }
 
-    this->_expression.deleteTree();
+    this->_expression.DeleteTree();
 
     slkd::Stack<dlkd::Node<std::string>*> stack;
     int numNodes = expression.size();
@@ -28,13 +28,14 @@ void ExpressionTreeCalculator::storeExpression(std::string expression) {
 
     while (iss >> token) {
         if (Parser::isNumber(token)) {
-            stack.push(new dlkd::Node<std::string>(token));
+            stack.Push(new dlkd::Node<std::string>(token));
         }
         else if (Parser::isValidOperator(token)) {
-            stack.push(new dlkd::Node<std::string>(token, stack.pop(), stack.pop()));
+            stack.Push(new dlkd::Node<std::string>(token, stack.Pop(), stack.Pop()));
         }
     }
-    this->_expression.insertExistingTree(stack.pop(), numNodes);
+
+    this->_expression.InsertExistingTree(stack.Pop(), numNodes);
 }
 
 void ExpressionTreeCalculator::storeExpression(std::string expression, std::string type) {
@@ -49,7 +50,7 @@ void ExpressionTreeCalculator::storeExpression(std::string expression, std::stri
             throw psrexcpt::InvalidExpression(expression);
     }
 
-    this->_expression.deleteTree();
+    this->_expression.DeleteTree();
 
     slkd::Stack<dlkd::Node<std::string>*> stack;
     int numNodes = expression.size();
@@ -59,31 +60,31 @@ void ExpressionTreeCalculator::storeExpression(std::string expression, std::stri
 
     while (iss >> token) {
         if (Parser::isNumber(token)) {
-            stack.push(new dlkd::Node<std::string>(token));
+            stack.Push(new dlkd::Node<std::string>(token));
         }
         else if (Parser::isValidOperator(token)) {
-            stack.push(new dlkd::Node<std::string>(token, stack.pop(), stack.pop()));
+            stack.Push(new dlkd::Node<std::string>(token, stack.Pop(), stack.Pop()));
         }
     }
-    this->_expression.insertExistingTree(stack.pop(), numNodes);
+    this->_expression.InsertExistingTree(stack.Pop(), numNodes);
 }
 
 std::string ExpressionTreeCalculator::postfix() {
     slkd::Queue<std::string> walk;
-    this->_expression.postorderTreeWalk(walk);
+    this->_expression.PostorderTreeWalk(walk);
     return Converter::queue2String(walk);
 }
 
 std::string ExpressionTreeCalculator::infix() {
     slkd::Queue<std::string> walk;
-    this->_expression.postorderTreeWalk(walk);
+    this->_expression.PostorderTreeWalk(walk);
     return Converter::postfix2Infix(walk);
 }
 
 void ExpressionTreeCalculator::showTree() {
     try {
         std::ofstream output("arvore.txt");
-        this->_expression.dumpTree(output);
+        this->_expression.DumpTree(output);
         output.close();
         std::cout << "Arvore impressa no arquivo 'arvore.txt'" << std::endl;
     }
@@ -96,44 +97,44 @@ long double ExpressionTreeCalculator::evaluation() {
     slkd::Stack<long double> evaluationStack;
     std::string token;
     slkd::Queue<std::string> postfix;
-    this->_expression.postorderTreeWalk(postfix);
+    this->_expression.PostorderTreeWalk(postfix);
 
     // A ordem das operacoes e o operando que estiver mais embaixo na pilha com o operando acima
     // essas variaveis sao utilizadas para preservar essa ordem nas operacoes de divisao e subtracao
     long double leftOperand, rightOperand;
 
-    while (!postfix.isEmpty()) {
-        token = postfix.dequeue();
+    while (!postfix.IsEmpty()) {
+        token = postfix.Dequeue();
         if (Parser::isNumber(token)) {
-            evaluationStack.push(Converter::str2Double(token));
+            evaluationStack.Push(Converter::str2Double(token));
         }
         else if (Parser::isValidOperator(token)) {
             switch (token.at(0)) {
                 case '+':
-                    evaluationStack.push(evaluationStack.pop() + evaluationStack.pop());
+                    evaluationStack.Push(evaluationStack.Pop() + evaluationStack.Pop());
                     continue;
 
                 case '-':
-                    rightOperand = evaluationStack.pop();
-                    leftOperand = evaluationStack.pop();
-                    evaluationStack.push(leftOperand - rightOperand);
+                    rightOperand = evaluationStack.Pop();
+                    leftOperand = evaluationStack.Pop();
+                    evaluationStack.Push(leftOperand - rightOperand);
                     continue;
 
                 case '*':
-                    evaluationStack.push(evaluationStack.pop() * evaluationStack.pop());
+                    evaluationStack.Push(evaluationStack.Pop() * evaluationStack.Pop());
                     continue;
 
                 case '/':
-                    rightOperand = evaluationStack.pop();
-                    leftOperand = evaluationStack.pop();
+                    rightOperand = evaluationStack.Pop();
+                    leftOperand = evaluationStack.Pop();
                     if (rightOperand == 0)
                         throw clcexcpt::DivisionByZero();
 
-                    evaluationStack.push(leftOperand / rightOperand);
+                    evaluationStack.Push(leftOperand / rightOperand);
                     continue;
             }
         }
     }
     // No fim desse trem todo, vai sobrar apenas um elemento na pilha, o qual e o resultado da expressao
-    return evaluationStack.pop();
+    return evaluationStack.Pop();
 }

@@ -4,9 +4,9 @@
 * Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
 */
 
-#include "utils.h"
+#include "solve_utils.h"
 
-namespace utils {
+namespace sutils {
     void defineCommand(const std::string &input, Command &cmd) {
         if (input == "LER")
             cmd = Command::LER;

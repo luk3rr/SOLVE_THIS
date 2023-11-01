@@ -11,12 +11,12 @@
 #include <sstream>
 #include <string>
 
-#include "binary_tree.h"
-#include "stack_singly_linked.h"
-#include "queue_singly_linked.h"
-#include "parser.h"
-#include "converter.h"
 #include "expression_tree_calculator_excpt.h"
+#include "parser.h"
+#include "queue_slkd.h"
+#include "stack_slkd.h"
+#include "converter.h"
+#include "binary_tree.h"
 
 class ExpressionTreeCalculator {
     private:

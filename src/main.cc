@@ -10,16 +10,11 @@
 #include <string>
 
 #include "analyzer.h"
-#include "converter.h"
-#include "expression_tree_calculator_excpt.h"
-#include "parser.h"
 #include "expression_tree_calculator.h"
-#include "parser_excpt.h"
-#include "queue_singly_linked.h"
-#include "utils.h"
+#include "solve_utils.h"
 
 void mainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTreeCalculator &calculator) {
-    utils::Command cmd;
+    sutils::Command cmd;
     std::string command, exp, lastToken;
     std::stringstream ss(input);
 
@@ -35,10 +30,10 @@ void mainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
         ss >> command;
     }
 
-    utils::defineCommand(command, cmd);
+    sutils::defineCommand(command, cmd);
 
     switch (cmd) {
-        case utils::Command::LER:
+        case sutils::Command::LER:
             std::getline(ss, exp);
             // Toda expressao posfixa necessariamente termina com um operador
             // Assim pode-se deferenciar uma possivel expressao posfixa de uma expressao infixa
@@ -65,7 +60,7 @@ void mainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
                 }
             }
             break;
-        case utils::Command::LER_INFIXA:
+        case sutils::Command::LER_INFIXA:
             std::getline(ss, exp);
             try {
                 calculator.storeExpression(exp, "INFIXA");
@@ -76,7 +71,7 @@ void mainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
                 std::cout << e.what() << std::endl;
             }
             break;
-        case utils::Command::LER_POSFIXA:
+        case sutils::Command::LER_POSFIXA:
             std::getline(ss, exp);
             try {
                 calculator.storeExpression(exp, "POSFIXA");
@@ -87,21 +82,21 @@ void mainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
                 std::cout << e.what() << std::endl;
             }
             break;
-        case utils::Command::INFIXA:
+        case sutils::Command::INFIXA:
             if (expressionOn)
                 std::cout << "INFIXA: " << calculator.infix() << std::endl;
             else {
                 std::cout << "ERRO: EXP NAO EXISTE" << std::endl;
             }
             break;
-        case utils::Command::POSFIXA:
+        case sutils::Command::POSFIXA:
             if (expressionOn)
                 std::cout << "POSFIXA: " << calculator.postfix() << std::endl;
             else {
                 std::cout << "ERRO: EXP NAO EXISTE" << std::endl;
             }
             break;
-        case utils::Command::RESOLVE:
+        case sutils::Command::RESOLVE:
             if (expressionOn)
                 try {
                     std::cout << "VAL: " << std::fixed << std::setprecision(6) << calculator.evaluation()<< std::endl;
@@ -113,22 +108,22 @@ void mainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
                 std::cout << "ERRO: EXP NAO EXISTE" << std::endl;
             }
             break;
-        case utils::Command::PRINT:
+        case sutils::Command::PRINT:
             if (expressionOn)
                 calculator.showTree();
             else
                 std::cout << "ERRO: EXP NAO EXISTE" << std::endl;
             break;
-        case utils::Command::ANALYZER:
+        case sutils::Command::ANALYZER:
             Analyzer analyzer;
             analyzer.expressionTreeCalculator_analysis();
             break;
 
-        case utils::Command::EXIT:
+        case sutils::Command::EXIT:
             run = false;
             break;
-        case utils::Command::HELP:
-            utils::usage();
+        case sutils::Command::HELP:
+            sutils::usage();
             break;
     }
 }

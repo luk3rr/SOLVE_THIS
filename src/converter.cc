@@ -63,41 +63,41 @@ std::string Converter::infix2Postfix(std::string str) {
             try {
                 // Enquanto a precedência do último operador lido na string for menor ou igual a precedência do operador
                 // no topo da pilha, mova este operador no topo para a fila output
-                while (Converter::precedence(token) <= Converter::precedence(simbols.peek()))
-                    output += simbols.pop() + " ";
+                while (Converter::precedence(token) <= Converter::precedence(simbols.Peek()))
+                    output += simbols.Pop() + " ";
 
-                simbols.push(token);
+                simbols.Push(token);
 
             }
             catch (stkexcpt::StackIsEmpty &e) {
-                simbols.push(token);
+                simbols.Push(token);
                 continue;
             }
         }
         else if (token == "(") {
             // O primeiro parenteses encontrado é enviado para a pilha de símbolos para sabermos quais são os limites das
             // precedências
-            simbols.push(token);
+            simbols.Push(token);
             continue;
         }
         else if (token == ")") {
             // O fechamento de parenteses indica o fim da precedência. Assim os operadores que estão na pilha podem ser
             // desempilhados e enviados à fila
             try {
-                while (simbols.peek() != "(")
-                    output += simbols.pop() + " ";
+                while (simbols.Peek() != "(")
+                    output += simbols.Pop() + " ";
 
-                simbols.pop();
+                simbols.Pop();
             } catch (stkexcpt::StackIsEmpty &e) {
                 continue;
             }
             // Descarta o parênteses que estava em simbols
         }
     }
-    while (!simbols.isEmpty()) {
+    while (!simbols.IsEmpty()) {
         // Em certos casos pode haver operadores na pilha de simbolos após a leitura da string terminar nesse caso esses
         // operadores podem ser desempilhados e enviados ao fim da expressão posfixa
-        output += simbols.pop() + " ";
+        output += simbols.Pop() + " ";
     }
 
     // Remove o espaço em branco no fim da string
@@ -110,18 +110,18 @@ std::string Converter::postfix2Infix(slkd::Queue<std::string> &postfix) {
     slkd::Stack<std::string> aux;
     std::string token, leftOperand, rightOperand;
 
-    while (!postfix.isEmpty()) {
-        token = postfix.dequeue();
+    while (!postfix.IsEmpty()) {
+        token = postfix.Dequeue();
         if (Parser::isNumber(token)) {
-            aux.push(token);
+            aux.Push(token);
         }
         else if (Parser::isValidOperator(token)) {
-            rightOperand = aux.pop();
-            leftOperand = aux.pop();
-            aux.push("( " + leftOperand + " " + token + " " + rightOperand + " )");
+            rightOperand = aux.Pop();
+            leftOperand = aux.Pop();
+            aux.Push("( " + leftOperand + " " + token + " " + rightOperand + " )");
         }
     }
-    return aux.pop();
+    return aux.Pop();
 }
 
 std::string Converter::postfix2Infix(std::string postfix) {
@@ -132,21 +132,21 @@ std::string Converter::postfix2Infix(std::string postfix) {
 
     while (iss >> token) {
         if (Parser::isNumber(token)) {
-            aux.push(token);
+            aux.Push(token);
         }
         else if (Parser::isValidOperator(token)) {
-            rightOperand = aux.pop();
-            leftOperand = aux.pop();
-            aux.push("( " + leftOperand + " " + token + " " + rightOperand + " )");
+            rightOperand = aux.Pop();
+            leftOperand = aux.Pop();
+            aux.Push("( " + leftOperand + " " + token + " " + rightOperand + " )");
         }
     }
-    return aux.pop();
+    return aux.Pop();
 }
 
 std::string Converter::queue2String(slkd::Queue<std::string> &queue) {
     std::string aux;
-    while (!queue.isEmpty())
-        aux += queue.dequeue() + " ";
+    while (!queue.IsEmpty())
+        aux += queue.Dequeue() + " ";
 
     if (!aux.empty() and aux.back() == ' ')
         aux.erase(aux.size() - 1);

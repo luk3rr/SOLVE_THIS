@@ -11,8 +11,8 @@
 #include <stdexcept>
 #include <sstream>
 
-#include "queue_singly_linked.h"
-#include "stack_singly_linked.h"
+#include "queue_slkd.h"
+#include "stack_slkd.h"
 
 class Converter {
     public:
