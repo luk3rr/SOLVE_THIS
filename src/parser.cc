@@ -5,7 +5,6 @@
 */
 
 #include "parser.h"
-#include <cstdint>
 
 bool Parser::IsNumber(std::string &str)
 {

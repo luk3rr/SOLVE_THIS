@@ -5,9 +5,6 @@
 */
 
 #include "analyzer.h"
-#include <cmath>
-#include <cstddef>
-#include <cstdint>
 
 double_t Analyzer::RandomNumber(double_t max)
 {

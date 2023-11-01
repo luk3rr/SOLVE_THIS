@@ -6,8 +6,6 @@
 
 #include "converter.h"
 #include "parser.h" // incluído aqui devido ao problema de inclusão recursiva
-#include <cmath>
-#include <cstdint>
 
 double_t Converter::Str2Double(std::string &str)
 {

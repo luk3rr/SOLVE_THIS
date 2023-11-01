@@ -13,6 +13,7 @@
 #include <string>
 #include <sstream>
 #include <cctype>
+#include <cstdint>
 
 #include "converter.h"
 #include "parser_excpt.h"

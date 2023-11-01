@@ -5,7 +5,6 @@
 */
 
 #include "expression_tree_calculator.h"
-#include <cmath>
 
 ExpressionTreeCalculator::~ExpressionTreeCalculator()
 {

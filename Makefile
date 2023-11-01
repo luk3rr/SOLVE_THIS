@@ -54,6 +54,9 @@ submodules:
 	@echo "Submodules built"
 
 run: build
+	$(BIN_DIR)/$(PROGRAM_NAME) --file
+
+run_interactive: build
 	$(BIN_DIR)/$(PROGRAM_NAME)
 
 tests: $(OBJ_DIR)/$(TEST_NAME)

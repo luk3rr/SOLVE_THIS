@@ -152,6 +152,7 @@ void MainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
         case sutils::Command::EXIT:
             run = false;
             break;
+
         case sutils::Command::HELP:
             sutils::Usage();
             break;
