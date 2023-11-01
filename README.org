@@ -1,0 +1,35 @@
+* SOLVE_THIS: Numeric Expression Solver
+SOLVE_THIS is a program that accepts mathematical expressions in infix or postfix notation and allows for both solving them and converting between the two notations. This program is the result of a practical activity in the Data Structures course of the [[https://dcc.ufmg.br/][Department of Computer Science at UFMG]].
+
+* Table of Contents
++ [[#Compilation][Compilation]]
++ [[#Execution][Execution]]
++ [[#Documentation][Documentation]]
+
+* Compilation
+SOLVE_THIS can be compiled with the following command:
+
+#+begin_src sh
+$ make build
+#+end_src
+
+* Execution
+To run the program, there are two options:
++ Interactive execution. To do this, execute the following command:
+
+#+begin_src sh
+$ make run_interactive
+#+end_src
+
+In this way, the program will start. Type =HELP= and press =enter= to view the list of possible commands.
+
++ Execution by passing a file containing the desired sequence of commands:
+
+#+begin_src sh
+$ make run < path/to/file
+#+end_src
+
+NOTE: The file should be structured so that there is one command per line. See some examples in [[https://github.com/luk3rr/SOLVE_THIS/tree/main/src/tests/inputs][src/tests/inputs]].
+
+* Documentation
+The first version of the documentation, as well as the task statement for this project, can be found [[https://github.com/luk3rr/SOLVE_THIS/tree/main/docs][here]].
