@@ -6,34 +6,45 @@
 
 #include "converter.h"
 #include "parser.h" // incluído aqui devido ao problema de inclusão recursiva
+#include <cmath>
+#include <cstdint>
 
-long double Converter::str2Double(std::string &str) {
-    Converter::comma2DotDecimalConverter(str);
+double_t Converter::Str2Double(std::string &str)
+{
+    Converter::Comma2DotDecimalConverter(str);
     return std::stod(str);
 }
 
-void Converter::comma2DotDecimalConverter(std::string &str) {
-    try {
+void Converter::Comma2DotDecimalConverter(std::string &str)
+{
+    try
+    {
         str.replace(str.find(","), 1, ".");
     }
-    catch (std::out_of_range &e) {
+    catch (std::out_of_range &e)
+    {
         // caractere ',' nao foi encontrado na string
         return;
     }
 }
 
-void Converter::dot2CommaDecimalConverter(std::string &str) {
-    try {
+void Converter::Dot2CommaDecimalConverter(std::string &str)
+{
+    try
+    {
         str.replace(str.find("."), 1, ",");
     }
-    catch (std::out_of_range &e) {
+    catch (std::out_of_range &e)
+    {
         // caractere '.' nao foi encontrado na string
         return;
     }
 }
 
-int Converter::precedence(const std::string &str) {
-    switch (str.at(0)) {
+int8_t Converter::Precedence(const std::string &str)
+{
+    switch (str.at(0))
+    {
         case '+':
         case '-':
             return 1;
@@ -47,108 +58,134 @@ int Converter::precedence(const std::string &str) {
     }
 }
 
-std::string Converter::infix2Postfix(std::string str) {
-    // Essa função foi implementada a partir da ideia do algoritmo "Shunting Yard", proposto por Edsgar Dijkstra
+std::string Converter::Infix2Postfix(std::string str)
+{
+    // Essa função foi implementada a partir da ideia do algoritmo "Shunting Yard",
+    // proposto por Edsgar Dijkstra
 
     slkd::Stack<std::string> simbols;
     std::string token, output;
     std::istringstream iss(str);
 
-    while (iss >> token) {
-        if (Parser::isNumber(token)) {
-            Converter::comma2DotDecimalConverter(token);
+    while (iss >> token)
+    {
+        if (Parser::IsNumber(token))
+        {
+            Converter::Comma2DotDecimalConverter(token);
             output += token + " ";
         }
-        else if (Parser::isValidOperator(token)) {
-            try {
+        else if (Parser::IsValidOperator(token))
+        {
+            try
+            {
                 // Enquanto a precedência do último operador lido na string for menor ou igual a precedência do operador
                 // no topo da pilha, mova este operador no topo para a fila output
-                while (Converter::precedence(token) <= Converter::precedence(simbols.Peek()))
+                while (Converter::Precedence(token) <= Converter::Precedence(simbols.Peek()))
                     output += simbols.Pop() + " ";
 
                 simbols.Push(token);
-
             }
-            catch (stkexcpt::StackIsEmpty &e) {
+            catch (stkexcpt::StackIsEmpty &e)
+            {
                 simbols.Push(token);
                 continue;
             }
         }
-        else if (token == "(") {
+        else if (token == "(")
+        {
             // O primeiro parenteses encontrado é enviado para a pilha de símbolos para sabermos quais são os limites das
             // precedências
             simbols.Push(token);
             continue;
         }
-        else if (token == ")") {
+        else if (token == ")")
+        {
             // O fechamento de parenteses indica o fim da precedência. Assim os operadores que estão na pilha podem ser
             // desempilhados e enviados à fila
-            try {
+            try
+            {
                 while (simbols.Peek() != "(")
                     output += simbols.Pop() + " ";
 
                 simbols.Pop();
-            } catch (stkexcpt::StackIsEmpty &e) {
+            }
+            catch (stkexcpt::StackIsEmpty &e)
+            {
                 continue;
             }
             // Descarta o parênteses que estava em simbols
         }
     }
-    while (!simbols.IsEmpty()) {
+
+    while (not simbols.IsEmpty())
+    {
         // Em certos casos pode haver operadores na pilha de simbolos após a leitura da string terminar nesse caso esses
         // operadores podem ser desempilhados e enviados ao fim da expressão posfixa
         output += simbols.Pop() + " ";
     }
 
     // Remove o espaço em branco no fim da string
-    if (!output.empty() and output.back() == ' ')
+    if (not output.empty() and output.back() == ' ')
         output.erase(output.size() - 1);
+
     return output;
 }
 
-std::string Converter::postfix2Infix(slkd::Queue<std::string> &postfix) {
+std::string Converter::Postfix2Infix(slkd::Queue<std::string> &postfix)
+{
     slkd::Stack<std::string> aux;
     std::string token, leftOperand, rightOperand;
 
-    while (!postfix.IsEmpty()) {
+    while (not postfix.IsEmpty())
+    {
         token = postfix.Dequeue();
-        if (Parser::isNumber(token)) {
+        if (Parser::IsNumber(token))
+        {
             aux.Push(token);
         }
-        else if (Parser::isValidOperator(token)) {
+        else if (Parser::IsValidOperator(token))
+        {
             rightOperand = aux.Pop();
             leftOperand = aux.Pop();
             aux.Push("( " + leftOperand + " " + token + " " + rightOperand + " )");
         }
     }
+
     return aux.Pop();
 }
 
-std::string Converter::postfix2Infix(std::string postfix) {
+std::string Converter::Postfix2Infix(std::string postfix)
+{
     slkd::Stack<std::string> aux;
     std::string token, leftOperand, rightOperand;
 
     std::istringstream iss(postfix);
 
-    while (iss >> token) {
-        if (Parser::isNumber(token)) {
+    while (iss >> token)
+    {
+        if (Parser::IsNumber(token))
+        {
             aux.Push(token);
         }
-        else if (Parser::isValidOperator(token)) {
+        else if (Parser::IsValidOperator(token))
+        {
             rightOperand = aux.Pop();
             leftOperand = aux.Pop();
             aux.Push("( " + leftOperand + " " + token + " " + rightOperand + " )");
         }
     }
+
     return aux.Pop();
 }
 
-std::string Converter::queue2String(slkd::Queue<std::string> &queue) {
+std::string Converter::Queue2String(slkd::Queue<std::string> &queue)
+{
     std::string aux;
-    while (!queue.IsEmpty())
+    while (not queue.IsEmpty())
         aux += queue.Dequeue() + " ";
 
-    if (!aux.empty() and aux.back() == ' ')
+    if (not aux.empty() and aux.back() == ' ')
         aux.erase(aux.size() - 1);
+
     return aux;
 }

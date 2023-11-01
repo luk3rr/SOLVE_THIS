@@ -10,8 +10,10 @@
 #include <exception>
 #include <string>
 
-namespace psrexcpt {
-    class InvalidExpression : public std::exception {
+namespace psrexcpt
+{
+    class InvalidExpression : public std::exception
+    {
         private:
             std::string msg;
 

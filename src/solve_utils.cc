@@ -6,8 +6,10 @@
 
 #include "solve_utils.h"
 
-namespace sutils {
-    void defineCommand(const std::string &input, Command &cmd) {
+namespace sutils
+{
+    void DefineCommand(const std::string &input, Command &cmd)
+    {
         if (input == "LER")
             cmd = Command::LER;
         else if (input == "LER INFIXA")
@@ -30,7 +32,8 @@ namespace sutils {
             cmd = Command::HELP;
     }
 
-    void usage() {
+    void Usage()
+    {
         std::cout << "Resolvedor de Expressão" << std::endl;
         std::cout << "\tLER \t\t<expressão>\tlê uma expressão genérica (posfixa ou infixa)" << std::endl;
         std::cout << "\tLER INFIXA \t<expressão>\tlê uma expressão infixa" << std::endl;

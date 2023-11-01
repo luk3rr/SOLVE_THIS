@@ -5,20 +5,25 @@
 */
 
 #include "expression_tree_calculator.h"
+#include <cmath>
 
-ExpressionTreeCalculator::~ExpressionTreeCalculator() {
-    this->_expression.DeleteTree();
+ExpressionTreeCalculator::~ExpressionTreeCalculator()
+{
+    this->m_expression.DeleteTree();
 }
 
-void ExpressionTreeCalculator::storeExpression(std::string expression) {
-    if (Parser::infixIsValid(expression)) {
-        expression = Converter::infix2Postfix(expression);
+void ExpressionTreeCalculator::StoreExpression(std::string expression)
+{
+    if (Parser::InfixIsValid(expression))
+    {
+        expression = Converter::Infix2Postfix(expression);
     }
-    else if (!Parser::postfixIsValid(expression)) {
+    else if (not Parser::PostfixIsValid(expression))
+    {
         throw psrexcpt::InvalidExpression(expression);
     }
 
-    this->_expression.DeleteTree();
+    this->m_expression.DeleteTree();
 
     slkd::Stack<dlkd::Node<std::string>*> stack;
     int numNodes = expression.size();
@@ -26,31 +31,38 @@ void ExpressionTreeCalculator::storeExpression(std::string expression) {
 
     std::istringstream iss(expression);
 
-    while (iss >> token) {
-        if (Parser::isNumber(token)) {
+    while (iss >> token)
+    {
+        if (Parser::IsNumber(token))
+        {
             stack.Push(new dlkd::Node<std::string>(token));
         }
-        else if (Parser::isValidOperator(token)) {
+        else if (Parser::IsValidOperator(token))
+        {
             stack.Push(new dlkd::Node<std::string>(token, stack.Pop(), stack.Pop()));
         }
     }
 
-    this->_expression.InsertExistingTree(stack.Pop(), numNodes);
+    this->m_expression.InsertExistingTree(stack.Pop(), numNodes);
 }
 
-void ExpressionTreeCalculator::storeExpression(std::string expression, std::string type) {
-    if (type == "INFIXA") {
-        if (Parser::infixIsValid(expression))
-            expression = Converter::infix2Postfix(expression);
+void ExpressionTreeCalculator::StoreExpression(std::string expression, std::string type)
+{
+    if (type == "INFIXA")
+    {
+        if (Parser::InfixIsValid(expression))
+            expression = Converter::Infix2Postfix(expression);
+
         else
             throw psrexcpt::InvalidExpression(expression);
     }
-    else if (type == "POSFIXA") {
-        if (!Parser::postfixIsValid(expression))
+    else if (type == "POSFIXA")
+    {
+        if (not Parser::PostfixIsValid(expression))
             throw psrexcpt::InvalidExpression(expression);
     }
 
-    this->_expression.DeleteTree();
+    this->m_expression.DeleteTree();
 
     slkd::Stack<dlkd::Node<std::string>*> stack;
     int numNodes = expression.size();
@@ -58,58 +70,75 @@ void ExpressionTreeCalculator::storeExpression(std::string expression, std::stri
 
     std::istringstream iss(expression);
 
-    while (iss >> token) {
-        if (Parser::isNumber(token)) {
+    while (iss >> token)
+    {
+        if (Parser::IsNumber(token))
+        {
             stack.Push(new dlkd::Node<std::string>(token));
         }
-        else if (Parser::isValidOperator(token)) {
+        else if (Parser::IsValidOperator(token))
+        {
             stack.Push(new dlkd::Node<std::string>(token, stack.Pop(), stack.Pop()));
         }
     }
-    this->_expression.InsertExistingTree(stack.Pop(), numNodes);
+
+    this->m_expression.InsertExistingTree(stack.Pop(), numNodes);
 }
 
-std::string ExpressionTreeCalculator::postfix() {
+std::string ExpressionTreeCalculator::Postfix()
+{
     slkd::Queue<std::string> walk;
-    this->_expression.PostorderTreeWalk(walk);
-    return Converter::queue2String(walk);
+    this->m_expression.PostorderTreeWalk(walk);
+
+    return Converter::Queue2String(walk);
 }
 
-std::string ExpressionTreeCalculator::infix() {
+std::string ExpressionTreeCalculator::Infix()
+{
     slkd::Queue<std::string> walk;
-    this->_expression.PostorderTreeWalk(walk);
-    return Converter::postfix2Infix(walk);
+    this->m_expression.PostorderTreeWalk(walk);
+
+    return Converter::Postfix2Infix(walk);
 }
 
-void ExpressionTreeCalculator::showTree() {
-    try {
+void ExpressionTreeCalculator::ShowTree()
+{
+    try
+    {
         std::ofstream output("arvore.txt");
-        this->_expression.DumpTree(output);
+        this->m_expression.DumpTree(output);
         output.close();
         std::cout << "Arvore impressa no arquivo 'arvore.txt'" << std::endl;
     }
-    catch (std::exception &e) {
+    catch (std::exception &e)
+    {
         std::cerr << "ERRO: " << e.what() << std::endl;
     }
 }
 
-long double ExpressionTreeCalculator::evaluation() {
+double_t ExpressionTreeCalculator::Evaluation()
+{
     slkd::Stack<long double> evaluationStack;
     std::string token;
     slkd::Queue<std::string> postfix;
-    this->_expression.PostorderTreeWalk(postfix);
+    this->m_expression.PostorderTreeWalk(postfix);
 
     // A ordem das operacoes e o operando que estiver mais embaixo na pilha com o operando acima
     // essas variaveis sao utilizadas para preservar essa ordem nas operacoes de divisao e subtracao
-    long double leftOperand, rightOperand;
+    double_t leftOperand, rightOperand;
 
-    while (!postfix.IsEmpty()) {
+    while (not postfix.IsEmpty())
+    {
         token = postfix.Dequeue();
-        if (Parser::isNumber(token)) {
-            evaluationStack.Push(Converter::str2Double(token));
+
+        if (Parser::IsNumber(token))
+        {
+            evaluationStack.Push(Converter::Str2Double(token));
         }
-        else if (Parser::isValidOperator(token)) {
-            switch (token.at(0)) {
+        else if (Parser::IsValidOperator(token))
+        {
+            switch (token.at(0))
+            {
                 case '+':
                     evaluationStack.Push(evaluationStack.Pop() + evaluationStack.Pop());
                     continue;
@@ -127,6 +156,7 @@ long double ExpressionTreeCalculator::evaluation() {
                 case '/':
                     rightOperand = evaluationStack.Pop();
                     leftOperand = evaluationStack.Pop();
+
                     if (rightOperand == 0)
                         throw clcexcpt::DivisionByZero();
 
@@ -135,6 +165,7 @@ long double ExpressionTreeCalculator::evaluation() {
             }
         }
     }
+
     // No fim desse trem todo, vai sobrar apenas um elemento na pilha, o qual e o resultado da expressao
     return evaluationStack.Pop();
 }

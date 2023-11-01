@@ -9,8 +9,10 @@
 
 #include <exception>
 
-namespace clcexcpt {
-    class DivisionByZero : public std::exception {
+namespace clcexcpt
+{
+    class DivisionByZero : public std::exception
+    {
         public:
             const char *what() const throw();
     };
