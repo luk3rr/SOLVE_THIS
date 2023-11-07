@@ -5,4 +5,6 @@ include
 include/lib
 -I
 submodules/data_structures/include
+-I
+test/benchmark
 --std=c++20

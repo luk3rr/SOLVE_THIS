@@ -10,23 +10,25 @@ SOLVE_THIS is a program that accepts mathematical expressions in infix or postfi
 SOLVE_THIS can be compiled with the following command:
 
 #+begin_src sh
-$ make build
+$ ./run --build
 #+end_src
 
 * Execution
-To run the program, there are two options:
-+ Interactive execution. To do this, execute the following command:
-
+To run the program, execute the following command:
 #+begin_src sh
-$ make run_interactive
+$ ./run --exec
 #+end_src
 
 In this way, the program will start. Type =HELP= and press =enter= to view the list of possible commands.
 
-+ Execution by passing a file containing the desired sequence of commands:
-
+Or execution by passing a file containing the desired sequence of commands:
 #+begin_src sh
-$ make run < path/to/file
+$ ./run --exec --exec_args --file path/to/file
+#+end_src
+
+Or, once the binary has already been compiled:
+#+begin_src sh
+$ bin/program --file path/to/file
 #+end_src
 
 NOTE: The file should be structured so that there is one command per line. See some examples in [[https://github.com/luk3rr/SOLVE_THIS/tree/main/src/tests/inputs][src/tests/inputs]].

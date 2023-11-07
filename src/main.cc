@@ -1,12 +1,12 @@
 /*
-* Filename: main.cc
-* Created on: May  9, 2023
-* Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
-*/
+ * Filename: main.cc
+ * Created on: May  9, 2023
+ * Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
+ */
 
 #include <cstdlib>
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 #include <sstream>
 #include <string>
 
@@ -14,10 +14,13 @@
 #include "expression_tree_calculator.h"
 #include "solve_utils.h"
 
-void MainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTreeCalculator &calculator)
+void MainOptions(std::string&              input,
+                 bool&                     run,
+                 bool&                     expressionOn,
+                 ExpressionTreeCalculator& calculator)
 {
-    sutils::Command cmd;
-    std::string command, exp, lastToken;
+    sutils::Command   cmd;
+    std::string       command, exp, lastToken;
     std::stringstream ss(input);
 
     if (input.size() > 10 && input.substr(0, 10) == "LER INFIXA")
@@ -42,7 +45,8 @@ void MainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
         case sutils::Command::LER:
             std::getline(ss, exp);
             // Toda expressao posfixa necessariamente termina com um operador
-            // Assim pode-se deferenciar uma possivel expressao posfixa de uma expressao infixa
+            // Assim pode-se deferenciar uma possivel expressao posfixa de uma expressao
+            // infixa
             lastToken = exp.back();
             if (Parser::IsValidOperator(lastToken))
             {
@@ -52,7 +56,7 @@ void MainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
                     std::cout << "EXPRESSAO OK: " << exp << std::endl;
                     expressionOn = true;
                 }
-                catch (psrexcpt::InvalidExpression &e)
+                catch (psrexcpt::InvalidExpression& e)
                 {
                     std::cout << e.what() << std::endl;
                 }
@@ -66,7 +70,7 @@ void MainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
                     std::cout << "EXPRESSAO OK: " << exp << std::endl;
                     expressionOn = true;
                 }
-                catch (psrexcpt::InvalidExpression &e)
+                catch (psrexcpt::InvalidExpression& e)
                 {
                     std::cout << e.what() << std::endl;
                 }
@@ -82,7 +86,7 @@ void MainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
                 std::cout << "EXPRESSAO OK: " << exp << std::endl;
                 expressionOn = true;
             }
-            catch (psrexcpt::InvalidExpression &e)
+            catch (psrexcpt::InvalidExpression& e)
             {
                 std::cout << e.what() << std::endl;
             }
@@ -97,7 +101,7 @@ void MainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
                 std::cout << "EXPRESSAO OK: " << exp << std::endl;
                 expressionOn = true;
             }
-            catch (psrexcpt::InvalidExpression &e)
+            catch (psrexcpt::InvalidExpression& e)
             {
                 std::cout << e.what() << std::endl;
             }
@@ -125,9 +129,10 @@ void MainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
             if (expressionOn)
                 try
                 {
-                    std::cout << "VAL: " << std::fixed << std::setprecision(6) << calculator.Evaluation()<< std::endl;
+                    std::cout << "VAL: " << std::fixed << std::setprecision(6)
+                              << calculator.Evaluation() << std::endl;
                 }
-                catch (clcexcpt::DivisionByZero &e)
+                catch (clcexcpt::DivisionByZero& e)
                 {
                     std::cout << e.what() << std::endl;
                 }
@@ -159,18 +164,29 @@ void MainOptions(std::string &input, bool &run, bool &expressionOn, ExpressionTr
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-    std::string input;
+    std::string              input;
     ExpressionTreeCalculator calculator;
-    bool run = true;
-    bool expressionOn = false;
+    bool                     run          = true;
+    bool                     expressionOn = false;
 
-    if (argc > 1 and std::string(argv[1]) == "--file")
+    if (argc > 1 && std::string(argv[1]) == "--file")
     {
-        while (std::getline(std::cin, input))
+        // If the --file option is passed as an argument, read the file line by line
+        std::ifstream file(argv[2]); // Open the file for reading
+        if (file.is_open())
         {
-            MainOptions(input, run, expressionOn, calculator);
+            while (std::getline(file, input))
+            {
+                MainOptions(input, run, expressionOn, calculator);
+            }
+            file.close(); // Close the file after reading
+        }
+        else
+        {
+            std::cerr << "Error opening the file: " << argv[2] << std::endl;
+            return EXIT_FAILURE;
         }
     }
     else
