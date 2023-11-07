@@ -107,7 +107,7 @@ std::string Converter::Infix2Postfix(std::string str)
 
                 simbols.Pop();
             }
-            catch (stkexcpt::StackIsEmpty &e)
+            catch (.../*stkexcpt::StackIsEmpty &e*/)
             {
                 continue;
             }
