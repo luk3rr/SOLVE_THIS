@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 
 #include "analyzer.h"
@@ -132,7 +133,7 @@ void MainOptions(std::string&              input,
                     std::cout << "VAL: " << std::fixed << std::setprecision(6)
                               << calculator.Evaluation() << std::endl;
                 }
-                catch (clcexcpt::DivisionByZero& e)
+                catch (std::logic_error& e)
                 {
                     std::cout << e.what() << std::endl;
                 }

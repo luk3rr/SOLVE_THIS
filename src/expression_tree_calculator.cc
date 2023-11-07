@@ -157,7 +157,7 @@ double_t ExpressionTreeCalculator::Evaluation()
                     leftOperand = evaluationStack.Pop();
 
                     if (rightOperand == 0)
-                        throw clcexcpt::DivisionByZero();
+                        throw std::logic_error("Divide by zero");
 
                     evaluationStack.Push(leftOperand / rightOperand);
                     continue;

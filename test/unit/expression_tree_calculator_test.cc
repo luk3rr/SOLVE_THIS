@@ -4,9 +4,11 @@
 * Author: Lucas Araújo <araujolucas@dcc.ufmg.br>
 */
 
+#include <stdexcept>
+
 #include "doctest.h"
+
 #include "expression_tree_calculator.h"
-#include "expression_tree_calculator_excpt.h"
 
 #define EPSILON 10e-5
 
@@ -28,13 +30,13 @@ TEST_CASE("Lançamento de exceção: Divisão por zero")
     {
         std::string infix = "( 3.02 + 4 ) * 2 / ( ( 5 + 2.89 ) / ( 1 - 1 ) )";
         calculator.StoreExpression(infix);
-        CHECK_THROWS_AS(calculator.Evaluation(), clcexcpt::DivisionByZero);
+        CHECK_THROWS_AS(calculator.Evaluation(), std::logic_error);
     }
 
     SUBCASE("Zero explícito na expressão")
     {
         std::string infix = "( 3.02 + 4 ) * 2 / ( 0 * ( 5 + 2.89 ) )";
         calculator.StoreExpression(infix);
-        CHECK_THROWS_AS(calculator.Evaluation(), clcexcpt::DivisionByZero);
+        CHECK_THROWS_AS(calculator.Evaluation(), std::logic_error);
     }
 }

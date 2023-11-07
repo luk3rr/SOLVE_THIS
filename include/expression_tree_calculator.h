@@ -13,6 +13,7 @@
 #include <string>
 #include <sstream>
 #include <string>
+#include <stdexcept>
 
 #include "queue_slkd.h"
 #include "stack_slkd.h"
@@ -20,7 +21,6 @@
 
 #include "parser.h"
 #include "converter.h"
-#include "expression_tree_calculator_excpt.h"
 
 class ExpressionTreeCalculator
 {
@@ -65,7 +65,7 @@ class ExpressionTreeCalculator
         /**
          * @brief Resolve a expressão armazenada na árvore
          * @return Float com o valor da expressão
-         * @throw clcexcpt::DivisionByZero Caso ocorra alguma tentativa de divisão por zero
+         * @throw std::logic_error Caso ocorra alguma tentativa de divisão por zero
          */
         double_t Evaluation();
 };
