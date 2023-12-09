@@ -83,7 +83,7 @@ std::string Converter::Infix2Postfix(std::string str)
 
                 simbols.Push(token);
             }
-            catch (stkexcpt::StackIsEmpty &e)
+            catch (std::overflow_error &e)
             {
                 simbols.Push(token);
                 continue;
@@ -107,7 +107,7 @@ std::string Converter::Infix2Postfix(std::string str)
 
                 simbols.Pop();
             }
-            catch (.../*stkexcpt::StackIsEmpty &e*/)
+            catch (std::overflow_error &e)
             {
                 continue;
             }
